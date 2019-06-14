@@ -25,4 +25,32 @@ public class PhoneModel {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Phone> getList(String sql) {
+        ArrayList<Phone> phones = new ArrayList<>();
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/phoneinformation", "root", "");
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int eId = resultSet.getInt(1);
+                String eName = resultSet.getString(2);
+                String eBrand = resultSet.getString(3);
+                int ePrice = resultSet.getInt(4);
+                String eDescription = resultSet.getString(5);
+                Phone phone = new Phone();
+                phone.setID(eId);
+                phone.setName(eName);
+                phone.setName(eBrand);
+                phone.setPrice(ePrice);
+                phone.setDescription(eDescription);
+                phones.add(phone);
+            }
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return phones;
+    }
 }

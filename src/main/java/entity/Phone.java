@@ -1,7 +1,7 @@
 package entity;
 
 public class Phone {
-    private long ID;
+    private int ID;
     private String Name;
     private String Brand;
     private int Price;
@@ -14,7 +14,7 @@ public class Phone {
         return ID;
     }
 
-    public void setID(long ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
